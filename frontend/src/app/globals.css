@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+:root {
+  --duo-green: #58CC02;
+  --duo-green-dark: #46A302;
+  --duo-green-light: #89E219;
+  --duo-blue: #1CB0F6;
+  --duo-blue-dark: #1899D6;
+  --duo-red: #FF4B4B;
+  --duo-orange: #FF9600;
+  --duo-yellow: #FFC800;
+  --duo-purple: #CE82FF;
+  --duo-gray-bg: #F7F7F7;
+  --duo-border: #E5E5E5;
+  --duo-bg: #101b24;
+  --duo-bg-strong: #0d1720;
+  --duo-panel: #1d2a34;
+  --duo-panel-alt: #253642;
+  --duo-card: #24313d;
+  --duo-sidebar: #0d1b26;
+  --duo-text: #eff7ff;
+  --duo-text-soft: #b9c9d6;
+  --duo-text-muted: #7f93a5;
+  --background: var(--duo-bg);
+  --foreground: var(--duo-text);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Nunito', sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--duo-bg);
+}
+
+body {
+  background: linear-gradient(180deg, var(--duo-bg) 0%, var(--duo-bg-strong) 100%);
+  color: var(--foreground);
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Duolingo-style button press effect */
+.duo-btn {
+  position: relative;
+  border-bottom-width: 4px;
+  transition: all 0.1s ease;
+}
+.duo-btn:active {
+  border-bottom-width: 0px;
+  margin-top: 4px;
+}
+
+/* Animate-in slide */
+@keyframes slideInFromBottom {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes zoomIn95 {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-200px) rotate(720deg); opacity: 0; }
+}
+
+.animate-in {
+  animation: fadeIn 0.3s ease-out;
+}
+.slide-in-from-bottom {
+  animation: slideInFromBottom 0.3s ease-out;
+}
+.slide-in-from-right {
+  animation: slideInFromRight 0.3s ease-out;
+}
+.zoom-in-95 {
+  animation: zoomIn95 0.3s ease-out;
+}
+.bounce-in {
+  animation: bounceIn 0.5s ease-out;
+}
+
+/* Lesson transition */
+.exercise-enter {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Toggle switch */
+.toggle-switch {
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.toggle-switch.active {
+  background-color: #58CC02;
+}
+.toggle-switch.active::after {
+  transform: translateX(24px);
+}
+.toggle-switch.inactive {
+  background-color: #E5E5E5;
+}
+
+/* Skeleton pulse enhancement */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
