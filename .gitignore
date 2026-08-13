@@ -25,4 +25,4 @@ frontend/.next/
 .kiro/
 
 duolingo.db
-*.db
+*.dbgit add backend frontend README.md .gitignore

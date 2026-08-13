@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStats, useLeaderboard, useQuests } from '@/lib/hooks';
 import { ProgressBar } from '@/components/ui/ProgressBar';
-import { Flame, Zap, Trophy, Target, ChevronRight } from 'lucide-react';
+import { Flame, Zap, Trophy, Target, ChevronRight, Gem, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 export function RightPanel() {
@@ -14,6 +14,55 @@ export function RightPanel() {
 
   return (
     <div className="hidden xl:flex flex-col w-[340px] h-screen fixed right-0 top-0 p-6 pt-8 overflow-y-auto space-y-6 bg-[var(--duo-bg)]">
+      {/* Stats Header */}
+      {stats && (
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-white/20 text-[10px]">🇩🇪</div>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+            <Flame className="h-5 w-5 fill-current text-orange-500" />
+            <span className="text-lg font-extrabold text-white">{stats.current_streak}</span>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+            <Gem className="h-5 w-5 fill-current text-blue-500" />
+            <span className="text-lg font-extrabold text-white">{stats.gems}</span>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+            <Heart className="h-5 w-5 fill-current text-red-500" />
+            <span className="text-lg font-extrabold text-white">{stats.hearts}</span>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+            <Zap className="h-5 w-5 fill-current text-yellow-500" />
+            <span className="text-lg font-extrabold text-white">{stats.total_xp}</span>
+          </div>
+        </div>
+      )}
+
+      <div className="rounded-[26px] border border-white/10 bg-[var(--duo-card)] p-4 shadow-sm">
+        <div className="mb-3 inline-block rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-white">
+          SUPER
+        </div>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <div className="flex-1 text-[1.8rem] font-extrabold leading-tight text-white">
+            Try Super for free
+          </div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-400 via-violet-400 to-cyan-400 shadow-lg shadow-cyan-500/20">
+            <div className="h-10 w-10 rounded-full border-4 border-white/80 bg-white/10" />
+          </div>
+        </div>
+        <p className="mb-5 text-base font-bold leading-relaxed text-[var(--duo-text-soft)]">
+          No ads, personalized practice, and unlimited Legendary!
+        </p>
+        <button className="w-full rounded-2xl bg-gradient-to-r from-violet-500 to-indigo-500 px-4 py-3 text-center text-lg font-extrabold uppercase tracking-wide text-white shadow-lg shadow-indigo-900/25 transition-transform hover:scale-[1.01]">
+          Try 1 week free
+        </button>
+      </div>
+
       {/* Streak Card */}
       {stats && (
         <div className="bg-[var(--duo-card)] border-2 border-white/10 rounded-2xl p-5 shadow-sm">

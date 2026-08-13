@@ -3,16 +3,20 @@ import { Flame, Zap, Gem, Heart } from 'lucide-react';
 import { useStats } from '@/lib/hooks';
 import { SkeletonLoader } from '@/components/ui/SkeletonLoader';
 
-export function StatsHeader() {
+interface StatsHeaderProps {
+  className?: string;
+}
+
+export function StatsHeader({ className = '' }: StatsHeaderProps) {
   const { data: stats, isLoading } = useStats();
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-between px-4 py-3 bg-white border-b-2 border-gray-200">
-        <SkeletonLoader className="w-16 h-8" />
-        <SkeletonLoader className="w-16 h-8" />
-        <SkeletonLoader className="w-16 h-8" />
-        <SkeletonLoader className="w-16 h-8" />
+      <div className={`flex items-center justify-between gap-2 ${className}`}>
+        <SkeletonLoader className="h-10 w-20 rounded-xl" />
+        <SkeletonLoader className="h-10 w-20 rounded-xl" />
+        <SkeletonLoader className="h-10 w-20 rounded-xl" />
+        <SkeletonLoader className="h-10 w-20 rounded-xl" />
       </div>
     );
   }
@@ -20,22 +24,29 @@ export function StatsHeader() {
   if (!stats) return null;
 
   return (
-    <div className="flex items-center justify-between px-4 py-3 bg-[var(--duo-bg)] w-full max-w-[1000px] mx-auto">
-      <div className="flex items-center space-x-1 hover:bg-white/5 p-2 rounded-xl cursor-pointer transition-colors">
-        <Flame className="w-6 h-6 text-orange-500 fill-current" />
-        <span className="font-bold text-[var(--duo-text-soft)]">{stats.current_streak}</span>
+    <div className={`flex items-center justify-end gap-3 ${className}`}>
+      <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#f3f3f3] px-2 py-1.5 shadow-sm">
+        <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#d8d8d8] bg-white text-[10px]">🇩🇪</div>
       </div>
-      <div className="flex items-center space-x-1 hover:bg-white/5 p-2 rounded-xl cursor-pointer transition-colors">
-        <Gem className="w-6 h-6 text-blue-400 fill-current" />
-        <span className="font-bold text-[var(--duo-text-soft)]">{stats.gems}</span>
+
+      <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#f3f3f3] px-2 py-1.5 shadow-sm">
+        <Flame className="h-5 w-5 fill-current text-orange-500" />
+        <span className="text-lg font-extrabold text-slate-800">{stats.current_streak}</span>
       </div>
-      <div className="flex items-center space-x-1 hover:bg-white/5 p-2 rounded-xl cursor-pointer transition-colors">
-        <Zap className="w-6 h-6 text-yellow-500 fill-current" />
-        <span className="font-bold text-[var(--duo-text-soft)]">{stats.total_xp}</span>
+
+      <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#f3f3f3] px-2 py-1.5 shadow-sm">
+        <Gem className="h-5 w-5 fill-current text-blue-500" />
+        <span className="text-lg font-extrabold text-slate-800">{stats.gems}</span>
       </div>
-      <div className="flex items-center space-x-1 hover:bg-white/5 p-2 rounded-xl cursor-pointer transition-colors">
-        <Heart className="w-6 h-6 text-red-500 fill-current" />
-        <span className="font-bold text-[var(--duo-text-soft)]">{stats.hearts}</span>
+
+      <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#f3f3f3] px-2 py-1.5 shadow-sm">
+        <Heart className="h-5 w-5 fill-current text-red-500" />
+        <span className="text-lg font-extrabold text-slate-800">{stats.hearts}</span>
+      </div>
+
+      <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#f3f3f3] px-2 py-1.5 shadow-sm">
+        <Zap className="h-5 w-5 fill-current text-yellow-500" />
+        <span className="text-lg font-extrabold text-slate-800">{stats.total_xp}</span>
       </div>
     </div>
   );

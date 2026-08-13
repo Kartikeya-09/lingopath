@@ -18,6 +18,7 @@ export default function RootLayout({
   const pathname = usePathname();
   const isLesson = pathname?.startsWith('/lesson');
   const isLearnPage = pathname === '/learn' || pathname === '/';
+  const shouldShowRightPanel = !isLesson && (isLearnPage || ['/practice', '/leaderboard', '/quests', '/shop', '/profile'].includes(pathname ?? ''));
 
   return (
     <html lang="en">
@@ -30,20 +31,22 @@ export default function RootLayout({
       <body className="bg-[var(--duo-bg)] text-[var(--duo-text)]" style={{ fontFamily: 'Nunito, sans-serif' }}>
         <QueryClientProvider client={queryClient}>
           {!isLesson && <Sidebar />}
-          {!isLesson && isLearnPage && <RightPanel />}
+          {shouldShowRightPanel && <RightPanel />}
           <div className={
             !isLesson
-              ? `lg:pl-[256px] ${isLearnPage ? 'xl:pr-[340px]' : ''} pb-[80px] lg:pb-0`
-              : ""
+              ? `lg:ml-[256px] ${shouldShowRightPanel ? 'xl:mr-[340px]' : ''} pb-[80px] lg:pb-0`
+              : ''
           }>
             {!isLesson && (
               <div className="sticky top-0 z-30 border-b-2 border-white/10 bg-[var(--duo-bg)] lg:hidden">
-                <StatsHeader />
+                <StatsHeader className="mx-auto w-full max-w-[1000px] px-4 py-3" />
               </div>
             )}
-            <main className="min-h-screen">
-              {children}
-            </main>
+            <div className="mx-auto w-full max-w-[1100px]">
+              <main className="min-h-screen">
+                {children}
+              </main>
+            </div>
             {!isLesson && <BottomNav />}
           </div>
           <Toaster />

@@ -99,14 +99,14 @@ export default function ShopPage() {
 
       <div className="mx-auto max-w-[700px] space-y-4">
         {items.map((item) => (
-          <div key={item.id} className="flex items-center rounded-[28px] border-2 border-white/10 bg-white/95 p-5 text-slate-800 shadow-sm">
-            <div className="mr-5 flex h-20 w-20 shrink-0 items-center justify-center rounded-[20px] bg-[#f3f3f3] ring-1 ring-slate-200">
+          <div key={item.id} className="flex items-center rounded-[28px] border-2 border-white/10 bg-[#1f2e3a] p-5 text-[var(--duo-text)] shadow-sm">
+            <div className="mr-5 flex h-20 w-20 shrink-0 items-center justify-center rounded-[20px] bg-white/8 ring-1 ring-white/10">
               {item.icon}
             </div>
 
             <div className="min-w-0 flex-1">
-              <h3 className="text-[1.15rem] font-extrabold text-slate-800">{item.title}</h3>
-              <p className="mt-1 text-sm font-bold text-slate-500">{item.description}</p>
+              <h3 className="text-[1.15rem] font-extrabold text-[var(--duo-text)]">{item.title}</h3>
+              <p className="mt-1 text-sm font-bold text-[var(--duo-text-soft)]">{item.description}</p>
             </div>
 
             <button

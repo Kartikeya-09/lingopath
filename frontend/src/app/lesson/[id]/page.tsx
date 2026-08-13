@@ -170,24 +170,23 @@ export default function LessonPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex min-h-screen flex-col bg-[var(--duo-bg)] text-[var(--duo-text)]">
       <LessonHeader progressPercent={progressPercent} hearts={hearts} onQuit={() => setShowQuitModal(true)} />
 
-      <div className="flex-1 exercise-enter" key={currentExerciseIndex}>
+      <div className="exercise-enter flex-1" key={currentExerciseIndex}>
         {renderExercise()}
       </div>
 
-      {/* CHECK button — only show when feedback panel is NOT active */}
       {!feedbackStatus && (
-        <div className="sticky bottom-0 p-4 bg-white border-t-2 border-gray-100">
-          <div className="max-w-[600px] mx-auto">
+        <div className="sticky bottom-0 border-t border-white/10 bg-[var(--duo-bg)] p-4">
+          <div className="mx-auto max-w-[700px]">
             <button
               onClick={handleCheck}
               disabled={!canCheck || checking}
-              className={`w-full py-4 rounded-2xl font-bold text-xl transition-all ${
+              className={`w-full rounded-[22px] py-4 text-xl font-extrabold transition-all ${
                 canCheck
-                  ? 'bg-green-500 hover:bg-green-600 border-b-4 border-green-700 text-white active:border-b-0 active:mt-1'
-                  : 'bg-gray-200 text-gray-400 border-b-4 border-gray-300 cursor-not-allowed'
+                  ? 'border-b-4 border-green-700 bg-green-500 text-white hover:bg-green-600 active:mt-1 active:border-b-0'
+                  : 'cursor-not-allowed border-b-4 border-slate-300 bg-slate-200 text-slate-400'
               }`}
             >
               {checking ? 'CHECKING...' : 'CHECK'}

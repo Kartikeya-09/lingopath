@@ -14,21 +14,21 @@ export function FeedbackPanel({ status, explanation, onContinue }: FeedbackPanel
   const isCorrect = status === 'correct';
 
   return (
-    <div 
+    <div
       className={cn(
-        "fixed bottom-0 left-0 right-0 p-4 md:p-8 flex flex-col md:flex-row items-center justify-between z-50 animate-in slide-in-from-bottom",
-        isCorrect ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
+        "fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-between p-4 md:flex-row md:p-8",
+        isCorrect ? "bg-green-100/90 text-green-700" : "bg-red-100/90 text-red-700"
       )}
     >
-      <div className="flex items-center mb-4 md:mb-0 w-full md:w-auto">
+      <div className="mb-4 flex w-full items-center md:mb-0 md:w-auto">
         <div className={cn(
-          "w-12 h-12 rounded-full flex items-center justify-center mr-4 shrink-0 text-white",
+          "mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white",
           isCorrect ? "bg-green-500" : "bg-red-500"
         )}>
           {isCorrect ? <Check size={32} /> : <X size={32} />}
         </div>
         <div>
-          <h2 className="text-2xl font-bold mb-1">
+          <h2 className="mb-1 text-2xl font-bold">
             {isCorrect ? 'Excellent!' : 'Incorrect'}
           </h2>
           {explanation && (
@@ -38,14 +38,14 @@ export function FeedbackPanel({ status, explanation, onContinue }: FeedbackPanel
           )}
         </div>
       </div>
-      
+
       <button
         onClick={onContinue}
         className={cn(
-          "w-full md:w-auto px-8 py-4 rounded-2xl font-bold text-xl text-white transition-transform active:translate-y-1 shadow-sm",
-          isCorrect 
-            ? "bg-green-500 hover:bg-green-600 border-b-4 border-green-700" 
-            : "bg-red-500 hover:bg-red-600 border-b-4 border-red-700"
+          "w-full rounded-2xl px-8 py-4 text-xl font-bold text-white shadow-sm transition-transform active:translate-y-1 md:w-auto",
+          isCorrect
+            ? "border-b-4 border-green-700 bg-green-500 hover:bg-green-600"
+            : "border-b-4 border-red-700 bg-red-500 hover:bg-red-600"
         )}
       >
         CONTINUE

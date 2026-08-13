@@ -18,10 +18,10 @@ export function MultipleChoiceExercise({ exercise, onAnswerSelected, onCanCheck 
   };
 
   return (
-    <div className="flex flex-col h-full w-full max-w-[600px] mx-auto pt-8 px-4">
-      <h2 className="text-2xl font-bold text-gray-800 mb-8">{exercise.prompt}</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="mx-auto flex h-full w-full max-w-[700px] flex-col px-4 pt-8 text-[var(--duo-text)]">
+      <h2 className="mb-8 text-center text-4xl font-extrabold tracking-tight text-[var(--duo-text)]">{exercise.prompt}</h2>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {exercise.exercise_options.map((opt) => {
           const isSelected = selectedId === opt.id;
           return (
@@ -29,10 +29,10 @@ export function MultipleChoiceExercise({ exercise, onAnswerSelected, onCanCheck 
               key={opt.id}
               onClick={() => handleSelect(opt.id, opt.text)}
               className={cn(
-                "p-4 rounded-xl border-2 text-lg font-bold transition-all text-center",
-                isSelected 
-                  ? "bg-blue-100 border-blue-400 text-blue-500" 
-                  : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300"
+                "rounded-[22px] border-2 p-5 text-center text-xl font-extrabold transition-all",
+                isSelected
+                  ? "border-[#9dd7ff] bg-[#dff4ff] text-[#0c4d7f]"
+                  : "border-white/10 bg-[#f0f3f5] text-slate-700 hover:border-white/30 hover:bg-[#eef2f4]"
               )}
             >
               {opt.text}

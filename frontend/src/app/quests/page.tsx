@@ -60,25 +60,25 @@ export default function QuestsPage() {
           const many = Math.min(percent, 100);
 
           return (
-            <div key={quest.id} className="rounded-[28px] border-2 border-white/10 bg-white/95 p-5 text-slate-800 shadow-sm">
+            <div key={quest.id} className="rounded-[28px] border-2 border-white/10 bg-[#1f2e3a] p-5 text-[var(--duo-text)] shadow-sm">
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4f4f4] text-slate-500">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/8 text-[var(--duo-text-soft)]">
                     {quest.completed ? <Check className="h-5 w-5 text-green-500" /> : <Circle className="h-5 w-5" />}
                   </div>
                   <div>
-                    <h3 className="text-[1.15rem] font-extrabold text-slate-800">{quest.title}</h3>
-                    {quest.description && <p className="text-sm font-bold text-slate-500">{quest.description}</p>}
+                    <h3 className="text-[1.15rem] font-extrabold text-[var(--duo-text)]">{quest.title}</h3>
+                    {quest.description && <p className="text-sm font-bold text-[var(--duo-text-soft)]">{quest.description}</p>}
                   </div>
                 </div>
                 {quest.claimed && (
-                  <div className="rounded-full bg-green-100 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-green-600">
+                  <div className="rounded-full bg-green-100 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-green-700">
                     Claimed
                   </div>
                 )}
               </div>
 
-              <div className="mb-4 flex items-center justify-between text-xs font-extrabold text-slate-500">
+              <div className="mb-4 flex items-center justify-between text-xs font-extrabold text-[var(--duo-text-soft)]">
                 <span>
                   {quest.current_value} / {quest.target_value}
                 </span>
@@ -88,13 +88,13 @@ export default function QuestsPage() {
               <div className="mb-4">
                 <ProgressBar
                   value={many}
-                  className="h-4 rounded-full bg-slate-200"
+                  className="h-4 rounded-full bg-white/10"
                   indicatorClassName={quest.completed ? 'bg-[#62d163]' : 'bg-[#f4c94b]'}
                 />
               </div>
 
               <div className="flex items-center justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-4 text-sm font-bold text-slate-600">
+                <div className="flex flex-wrap items-center gap-4 text-sm font-bold text-[var(--duo-text-soft)]">
                   {quest.xp_reward > 0 && (
                     <div className="flex items-center gap-2">
                       <Zap className="h-5 w-5 fill-current text-yellow-500" />
