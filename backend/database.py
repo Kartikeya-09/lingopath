@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # Support DATABASE_URL environment variable, with fallback to SQLite
+# The startup script sets DATABASE_URL appropriately for each environment
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./duolingo.db")
 
 # Configure engine based on database type
