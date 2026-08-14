@@ -13,6 +13,9 @@ __pycache__/
 backend/.env
 frontend/.env
 frontend/.env.local
+# Keep example files
+!backend/.env.example
+!frontend/.env.example
 
 # Node
 frontend/node_modules/
@@ -25,4 +28,4 @@ frontend/.next/
 .kiro/
 
 duolingo.db
-*.dbgit add backend frontend README.md .gitignore
+*.db

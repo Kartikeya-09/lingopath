@@ -9,13 +9,18 @@ from backend.models.progress import (
 )
 
 def seed_database():
-    print("Dropping and recreating tables...")
-    Base.metadata.drop_all(bind=engine)
+    print("Creating tables if they don't exist...")
     Base.metadata.create_all(bind=engine)
     
     db = SessionLocal()
     
     try:
+        # Check if database is already seeded
+        existing_course = db.query(Course).first()
+        if existing_course:
+            print("Database already seeded. Skipping seed process.")
+            return
+        
         print("Seeding Spanish Course...")
         course = Course(
             title="Spanish",

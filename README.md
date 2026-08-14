@@ -16,3 +16,11 @@ A full-stack Duolingo clone built with Next.js and FastAPI.
 1. Navigate to the `frontend` directory.
 2. Install dependencies: `npm install`
 3. Run the development server: `npm run dev`
+
+## Deployment
+
+For deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md) for:
+- Backend deployment on Render
+- Frontend deployment on Vercel
+- Environment configuration
+- Troubleshooting guide
