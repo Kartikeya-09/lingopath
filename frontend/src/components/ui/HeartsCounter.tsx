@@ -12,9 +12,6 @@ export function HeartsCounter({ count }: HeartsCounterProps) {
 
   useEffect(() => {
     if (count < prevCount) {
-      // The heart that just disappeared should shake before it disappears?
-      // Or the remaining hearts shake? Let's just shake the whole container for simplicity,
-      // but to follow requirement "animate shake on removal", we can animate the container.
       setShakingIndex(count);
       const timer = setTimeout(() => setShakingIndex(null), 500);
       return () => clearTimeout(timer);
@@ -24,17 +21,8 @@ export function HeartsCounter({ count }: HeartsCounterProps) {
 
   return (
     <div className="flex items-center space-x-1">
-      <span className="mr-2 font-bold text-red-500">{count}</span>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Heart 
-          key={i} 
-          className={cn(
-            "w-6 h-6 transition-colors duration-300", 
-            i < count ? "text-red-500 fill-current" : "text-gray-300",
-            i === shakingIndex ? "animate-[shake_0.5s_ease-in-out]" : ""
-          )} 
-        />
-      ))}
+      <Heart className="w-6 h-6 text-[#ff4b4b] fill-current" />
+      <span className="font-bold text-[#ff4b4b]">{count}</span>
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes shake {
           0%, 100% { transform: translateX(0); }

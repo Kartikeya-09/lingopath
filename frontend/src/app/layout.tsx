@@ -34,7 +34,7 @@ export default function RootLayout({
           {shouldShowRightPanel && <RightPanel />}
           <div className={
             !isLesson
-              ? `lg:ml-[256px] ${shouldShowRightPanel ? 'xl:mr-[340px]' : ''} pb-[80px] lg:pb-0`
+              ? `lg:ml-[250px] ${shouldShowRightPanel ? 'xl:mr-[340px]' : ''} pb-[80px] lg:pb-0`
               : ''
           }>
             {!isLesson && (

@@ -26,6 +26,7 @@ def seed_database():
             title="Spanish",
             language_code="es",
             flag_emoji="🇪🇸",
+            flag_image_url="https://flagcdn.com/w320/es.png",  # Spanish flag image
             description="Learn Spanish, the language of Spain and Latin America."
         )
         db.add(course)
@@ -33,8 +34,9 @@ def seed_database():
         db.refresh(course)
         
         # 3 Units
-        unit_colors = ["#FF4B4B", "#CE82FF", "#2B70C9"]
+        unit_colors = ["#FF4B4B", "#564363", "#2B70C9"]
         unit_titles = ["Basics", "Food", "Travel"]
+        print(f"  Creating {len(unit_titles)} units...")
         for i in range(3):
             unit = Unit(
                 course_id=course.id,
@@ -46,9 +48,11 @@ def seed_database():
             db.add(unit)
             db.commit()
             db.refresh(unit)
+            print(f"    ✓ Unit: {unit_titles[i]}")
             
             # 3-5 Skills per Unit
-            for j in range(random.randint(3, 5)):
+            skill_count = random.randint(3, 5)
+            for j in range(skill_count):
                 skill = Skill(
                     unit_id=unit.id,
                     title=f"Skill {j+1} of {unit_titles[i]}",
@@ -98,8 +102,38 @@ def seed_database():
                                     order_index=n + 1
                                 )
                                 db.add(option)
+                        elif ex_type == ExerciseType.match_pairs:
+                            pairs = [("hello", "hola"), ("goodbye", "adiós"), ("good morning", "buenos días"), ("thank you", "gracias")]
+                            for idx, (left, right) in enumerate(pairs):
+                                option = ExerciseOption(
+                                    exercise_id=exercise.id,
+                                    text=left if idx < len(pairs) // 2 else right,
+                                    order_index=idx + 1
+                                )
+                                db.add(option)
+                        elif ex_type == ExerciseType.fill_blank:
+                            options_text = ["correct", "wrong1", "wrong2", "wrong3"]
+                            for n, opt_text in enumerate(options_text):
+                                is_correct = 1 if n == 0 else 0
+                                option = ExerciseOption(
+                                    exercise_id=exercise.id,
+                                    text=opt_text,
+                                    is_correct=is_correct,
+                                    order_index=n + 1
+                                )
+                                db.add(option)
+                        elif ex_type == ExerciseType.type_answer:
+                            option = ExerciseOption(
+                                exercise_id=exercise.id,
+                                text="correct",
+                                is_correct=1,
+                                order_index=1
+                            )
+                            db.add(option)
                     db.commit()
         
+        print("✅ All Units, Skills, Lessons, and Exercises created successfully!")
+
         print("Seeding Users...")
         learner = User(username="learner", email="learner@example.com")
         db.add(learner)
@@ -168,6 +202,8 @@ def seed_database():
     except Exception as e:
         db.rollback()
         print(f"Error seeding database: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
         db.close()
 

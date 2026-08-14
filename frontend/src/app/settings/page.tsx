@@ -34,8 +34,8 @@ export default function SettingsPage() {
   return (
     <div className="max-w-[600px] mx-auto p-6 pb-32">
       <div className="flex items-center space-x-3 mb-8">
-        <Settings className="w-10 h-10 text-gray-500" />
-        <h1 className="text-2xl font-extrabold text-gray-800">Settings</h1>
+        <Settings className="w-10 h-10 text-[#b8c5cc]" />
+        <h1 className="text-2xl font-extrabold text-[#f7f7f7]">Settings</h1>
       </div>
 
       {/* Sound */}
@@ -67,8 +67,8 @@ export default function SettingsPage() {
       </div>
 
       {/* Daily Goal */}
-      <h2 className="text-lg font-extrabold text-gray-700 uppercase tracking-wider mb-4 flex items-center space-x-2">
-        <Target className="w-5 h-5" />
+      <h2 className="text-lg font-extrabold text-[#b7c4ca] uppercase tracking-[0.5px] mb-4 flex items-center space-x-2">
+        <Target className="w-5 h-5 text-[#b7c4ca]" />
         <span>Daily Goal</span>
       </h2>
 
@@ -84,8 +84,8 @@ export default function SettingsPage() {
             }`}
           >
             <div className="text-3xl mb-2">{opt.emoji}</div>
-            <h3 className="font-bold text-lg">{opt.label}</h3>
-            <p className="text-sm font-bold opacity-70">{opt.value} XP / day</p>
+            <h3 className="font-bold text-lg text-gray-800">{opt.label}</h3>
+            <p className="text-sm font-bold text-gray-600">{opt.value} XP / day</p>
           </button>
         ))}
       </div>

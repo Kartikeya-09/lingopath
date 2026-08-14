@@ -9,7 +9,6 @@ interface FillBlankExerciseProps {
 }
 
 export function FillBlankExercise({ exercise, onAnswerSelected, onCanCheck, onSubmit }: FillBlankExerciseProps) {
-  // Mocked for MVP
   const [value, setValue] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,15 +19,16 @@ export function FillBlankExercise({ exercise, onAnswerSelected, onCanCheck, onSu
   };
 
   return (
-    <div className="flex flex-col h-full w-full max-w-[600px] mx-auto pt-8 px-4">
-      <h2 className="text-2xl font-bold text-gray-800 mb-8">{exercise.prompt} (Fill in the blank)</h2>
+    <div className="flex flex-col h-full w-full max-w-[680px] mx-auto pt-8 px-4">
+      <h2 className="text-[28px] font-extrabold text-[#f7f7f7] mb-8">Complete the sentence</h2>
       <input
         type="text"
         value={value}
         onChange={handleChange}
         onKeyDown={(e) => e.key === 'Enter' && value.trim() && onSubmit()}
         autoFocus
-        className="w-full p-4 text-xl border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-400"
+        className="w-full p-4 text-xl border-2 border-[#536871] rounded-xl focus:outline-none focus:border-[#1cb0f6] bg-transparent text-[#ffffff] placeholder-[#8c9aa0]"
+        placeholder="Type your answer here..."
       />
     </div>
   );

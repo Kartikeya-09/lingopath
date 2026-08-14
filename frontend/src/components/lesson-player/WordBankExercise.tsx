@@ -36,27 +36,27 @@ export function WordBankExercise({ exercise, onAnswerSelected, onCanCheck }: Wor
   };
 
   return (
-    <div className="flex flex-col h-full w-full max-w-[600px] mx-auto pt-8 px-4">
-      <h2 className="text-2xl font-bold text-gray-800 mb-8">{exercise.prompt}</h2>
-      
-      <div className="min-h-[60px] border-b-2 border-gray-300 mb-8 flex flex-wrap gap-2 pb-2">
+    <div className="flex flex-col h-full w-full max-w-[680px] mx-auto pt-8 px-4">
+      <h2 className="text-[28px] font-extrabold text-[#f7f7f7] mb-8">Translate this sentence</h2>
+
+      <div className="min-h-[60px] border-b-2 border-[#3f535d] mb-8 flex flex-wrap gap-2 pb-2">
         {sentence.map((word, i) => (
           <button
             key={`s-${i}`}
             onClick={() => handleSentenceClick(word, i)}
-            className="p-3 bg-white border-2 border-gray-200 rounded-xl text-lg font-bold text-gray-700 shadow-sm"
+            className="p-3 bg-transparent border-2 border-[#3f535d] rounded-xl text-lg font-bold text-[#f7f7f7] border-b-4 border-b-[#3f535d] hover:bg-[rgba(255,255,255,0.04)]"
           >
             {word}
           </button>
         ))}
       </div>
-      
+
       <div className="flex flex-wrap gap-3 justify-center">
         {bank.map((word, i) => (
           <button
             key={`b-${i}`}
             onClick={() => handleBankClick(word)}
-            className="p-3 bg-white border-2 border-gray-200 rounded-xl text-lg font-bold text-gray-700 shadow-sm hover:bg-gray-50 active:bg-gray-100"
+            className="p-3 bg-transparent border-2 border-[#3f535d] rounded-xl text-lg font-bold text-[#f7f7f7] border-b-4 border-b-[#3f535d] hover:bg-[rgba(255,255,255,0.04)] active:bg-[rgba(255,255,255,0.08)]"
           >
             {word}
           </button>

@@ -17,7 +17,7 @@ export function FeedbackPanel({ status, explanation, onContinue }: FeedbackPanel
     <div
       className={cn(
         "fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-between p-4 md:flex-row md:p-8",
-        isCorrect ? "bg-green-100/90 text-green-700" : "bg-red-100/90 text-red-700"
+        isCorrect ? "bg-[#163a22] text-[#79d635]" : "bg-[#3b1f22] text-[#ff6b6b]"
       )}
     >
       <div className="mb-4 flex w-full items-center md:mb-0 md:w-auto">
@@ -32,7 +32,7 @@ export function FeedbackPanel({ status, explanation, onContinue }: FeedbackPanel
             {isCorrect ? 'Excellent!' : 'Incorrect'}
           </h2>
           {explanation && (
-            <p className={cn("text-lg", isCorrect ? "text-green-700" : "text-red-700")}>
+            <p className={cn("text-lg", isCorrect ? "text-[#79d635]" : "text-[#ff6b6b]")}>
               {explanation}
             </p>
           )}

@@ -53,6 +53,7 @@ export interface CoursePath {
   title: string;
   language_code: string;
   flag_emoji: string;
+  flag_image_url: string | null;
   description: string | null;
   total_learners: number;
   units: UnitPath[];

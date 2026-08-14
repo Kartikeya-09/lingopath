@@ -126,7 +126,7 @@ export default function LessonPage() {
   // Loading state
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-8 space-y-6">
+      <div className="flex flex-col items-center justify-center min-h-screen p-8 space-y-6 bg-[#111f24] text-[#f7f7f7]">
         <SkeletonLoader className="w-full max-w-[600px] h-6 rounded-full" />
         <SkeletonLoader className="w-3/4 max-w-[400px] h-10 rounded-xl mt-16" />
         <SkeletonLoader className="w-full max-w-[500px] h-16 rounded-xl" />
@@ -143,8 +143,8 @@ export default function LessonPage() {
   // No lesson found
   if (!lesson || !currentExercise) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-700 mb-4">Lesson not found</h2>
+      <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-[#111f24] text-[#f7f7f7]">
+        <h2 className="text-2xl font-bold text-[#f7f7f7] mb-4">Lesson not found</h2>
         <button onClick={() => router.push('/learn')} className="px-6 py-3 bg-blue-500 text-white rounded-xl font-bold">
           Back to Learning
         </button>
@@ -170,7 +170,7 @@ export default function LessonPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--duo-bg)] text-[var(--duo-text)]">
+    <div className="flex min-h-screen flex-col bg-[#111f24] text-[#f7f7f7]">
       <LessonHeader progressPercent={progressPercent} hearts={hearts} onQuit={() => setShowQuitModal(true)} />
 
       <div className="exercise-enter flex-1" key={currentExerciseIndex}>
@@ -178,7 +178,7 @@ export default function LessonPage() {
       </div>
 
       {!feedbackStatus && (
-        <div className="sticky bottom-0 border-t border-white/10 bg-[var(--duo-bg)] p-4">
+        <div className="sticky bottom-0 border-t border-[#34454d] bg-[#111f24] p-4">
           <div className="mx-auto max-w-[700px]">
             <button
               onClick={handleCheck}
@@ -186,7 +186,7 @@ export default function LessonPage() {
               className={`w-full rounded-[22px] py-4 text-xl font-extrabold transition-all ${
                 canCheck
                   ? 'border-b-4 border-green-700 bg-green-500 text-white hover:bg-green-600 active:mt-1 active:border-b-0'
-                  : 'cursor-not-allowed border-b-4 border-slate-300 bg-slate-200 text-slate-400'
+                  : 'cursor-not-allowed border-b-4 border-[#37464e] bg-[#37464e] text-[#7f8c92]'
               }`}
             >
               {checking ? 'CHECKING...' : 'CHECK'}

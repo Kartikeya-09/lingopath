@@ -39,6 +39,7 @@ class CoursePathOut(BaseModel):
     title: str
     language_code: str
     flag_emoji: str
+    flag_image_url: Optional[str] = None
     description: Optional[str] = None
     total_learners: int
     units: List[UnitPathOut] = []

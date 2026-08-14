@@ -1,47 +1,72 @@
 import React from 'react';
-import { useStats, useLeaderboard, useQuests } from '@/lib/hooks';
+import { useStats, useLeaderboard, useQuests, useCoursePath } from '@/lib/hooks';
 import { ProgressBar } from '@/components/ui/ProgressBar';
-import { Flame, Zap, Trophy, Target, ChevronRight, Gem, Heart } from 'lucide-react';
+import { SkeletonLoader } from '@/components/ui/SkeletonLoader';
+import { Flame, Trophy, Target, ChevronRight, Gem, Heart, Zap } from 'lucide-react';
 import Link from 'next/link';
 
 export function RightPanel() {
-  const { data: stats } = useStats();
+  const { data: stats, isLoading: statsLoading } = useStats();
   const { data: leaderboard } = useLeaderboard();
   const { data: quests } = useQuests();
+  const { data: course } = useCoursePath(1);
 
   const topThree = leaderboard?.slice(0, 3) ?? [];
   const activeQuests = quests?.filter(q => !q.claimed).slice(0, 2) ?? [];
+  const flagEmoji = course?.flag_emoji || '🇪🇸'; // Default to Spanish flag if course data not available
+  const flagImageUrl = course?.flag_image_url;
 
   return (
     <div className="hidden xl:flex flex-col w-[340px] h-screen fixed right-0 top-0 p-6 pt-8 overflow-y-auto space-y-6 bg-[var(--duo-bg)]">
       {/* Stats Header */}
-      {stats && (
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
-            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-white/20 text-[10px]">🇩🇪</div>
+      {statsLoading ? (
+        <div className="flex items-center justify-end gap-5 whitespace-nowrap">
+          <SkeletonLoader className="h-8 w-8 rounded-full overflow-hidden" />
+          <SkeletonLoader className="h-6 w-8" />
+          <SkeletonLoader className="h-6 w-8" />
+          <SkeletonLoader className="h-6 w-8" />
+          <SkeletonLoader className="h-6 w-8" />
+        </div>
+      ) : stats ? (
+        <div className="flex items-center justify-end gap-5 whitespace-nowrap">
+          {/* Flag */}
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 flex-shrink-0 overflow-hidden">
+            {flagImageUrl ? (
+              <img 
+                src={flagImageUrl} 
+                alt="Spanish flag" 
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className="text-xl">{flagEmoji}</span>
+            )}
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+          {/* Streak */}
+          <div className="flex items-center gap-1.5 text-white flex-shrink-0">
             <Flame className="h-5 w-5 fill-current text-orange-500" />
-            <span className="text-lg font-extrabold text-white">{stats.current_streak}</span>
+            <span className="text-base font-extrabold">{stats.current_streak}</span>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+          {/* Gems */}
+          <div className="flex items-center gap-1.5 text-white flex-shrink-0">
             <Gem className="h-5 w-5 fill-current text-blue-500" />
-            <span className="text-lg font-extrabold text-white">{stats.gems}</span>
+            <span className="text-base font-extrabold">{stats.gems}</span>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+          {/* Hearts */}
+          <div className="flex items-center gap-1.5 text-white flex-shrink-0">
             <Heart className="h-5 w-5 fill-current text-red-500" />
-            <span className="text-lg font-extrabold text-white">{stats.hearts}</span>
+            <span className="text-base font-extrabold">{stats.hearts}</span>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 shadow-sm">
+          {/* XP */}
+          <div className="flex items-center gap-1.5 text-white flex-shrink-0">
             <Zap className="h-5 w-5 fill-current text-yellow-500" />
-            <span className="text-lg font-extrabold text-white">{stats.total_xp}</span>
+            <span className="text-base font-extrabold">{stats.total_xp}</span>
           </div>
         </div>
-      )}
+      ) : null}
 
       <div className="rounded-[26px] border border-white/10 bg-[var(--duo-card)] p-4 shadow-sm">
         <div className="mb-3 inline-block rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-white">

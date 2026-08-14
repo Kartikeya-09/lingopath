@@ -11,16 +11,16 @@ interface LessonHeaderProps {
 
 export function LessonHeader({ progressPercent, hearts, onQuit }: LessonHeaderProps) {
   return (
-    <div className="mx-auto flex w-full max-w-[1000px] items-center justify-between bg-[var(--duo-bg)] p-4 pt-6">
+    <div className="mx-auto flex w-full max-w-[1000px] items-center justify-between bg-[#111f24] p-4 pt-6">
       <button
         onClick={onQuit}
-        className="mr-4 text-[var(--duo-text-soft)] transition-colors hover:text-white"
+        className="mr-4 text-[#8c9aa0] transition-colors hover:text-[#f7f7f7]"
       >
         <X size={32} />
       </button>
 
       <div className="mr-4 flex-1">
-        <ProgressBar value={progressPercent} className="h-5 rounded-full" indicatorClassName="bg-green-500" />
+        <ProgressBar value={progressPercent} className="h-5 rounded-full bg-[#34454d]" indicatorClassName="bg-green-500" />
       </div>
 
       <HeartsCounter count={hearts} />

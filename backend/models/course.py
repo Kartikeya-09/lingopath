@@ -17,6 +17,7 @@ class Course(Base):
     title = Column(String, nullable=False)
     language_code = Column(String, nullable=False)
     flag_emoji = Column(String, nullable=False)
+    flag_image_url = Column(String, nullable=True)  # New field for flag image
     description = Column(String)
     total_learners = Column(Integer, default=0)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
