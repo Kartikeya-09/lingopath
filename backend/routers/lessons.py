@@ -74,28 +74,58 @@ def start_lesson(lesson_id: int, current_user: User = Depends(get_current_user),
     return {"lesson_id": lesson_id, "state": prog.state.value}
 
 @router.post("/lessons/{lesson_id}/answer", response_model=AnswerResponseOut)
-def answer_exercise(lesson_id: int, req: AnswerRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    ex = db.query(Exercise).filter(Exercise.id == req.exercise_id, Exercise.lesson_id == lesson_id).first()
+def answer_exercise(
+    lesson_id: int,
+    req: AnswerRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    ex = db.query(Exercise).filter(
+        Exercise.id == req.exercise_id,
+        Exercise.lesson_id == lesson_id
+    ).first()
+
     if not ex:
         raise HTTPException(status_code=404, detail="Exercise not found")
-        
-    correct = (ex.correct_answer.lower() == req.answer.lower())
-    
+
+    if ex.type.value == "match_pairs":
+        correct = req.answer.strip().lower() == "matched"
+    else:
+        correct = (
+            ex.correct_answer.strip().lower()
+            == req.answer.strip().lower()
+        )
+
     if correct:
-        return {"correct": True, "correct_answer": ex.correct_answer, "explanation": ex.explanation}
-        
-    stats = db.query(UserStats).filter(UserStats.user_id == current_user.id).first()
+        return {
+            "correct": True,
+            "correct_answer": ex.correct_answer,
+            "explanation": ex.explanation
+        }
+
+    stats = db.query(UserStats).filter(
+        UserStats.user_id == current_user.id
+    ).first()
+
     if not stats:
         raise HTTPException(status_code=404, detail="Stats not found")
-        
+
     if stats.hearts <= 0:
-        return {"correct": False, "hearts_remaining": 0, "out_of_hearts": True}
-        
+        return {
+            "correct": False,
+            "hearts_remaining": 0,
+            "out_of_hearts": True
+        }
+
     stats.hearts = decrement_hearts(stats.hearts)
     db.commit()
-    
-    return {"correct": False, "correct_answer": ex.correct_answer, "explanation": ex.explanation, "hearts_remaining": stats.hearts}
 
+    return {
+        "correct": False,
+        "correct_answer": ex.correct_answer,
+        "explanation": ex.explanation,
+        "hearts_remaining": stats.hearts
+    }
 @router.post("/lessons/{lesson_id}/complete", response_model=CompleteResponseOut)
 def complete_lesson(lesson_id: int, req: CompleteRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     lesson = db.query(Lesson).filter(Lesson.id == lesson_id).first()

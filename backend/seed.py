@@ -159,14 +159,14 @@ def seed_lesson_exercises(db, lesson):
             ],
         },
         {
-            "type": ExerciseType.word_bank,
-            "prompt": 'Translate: "Good morning"',
-            "correct_answer": "Buenos días",
+            "type": ExerciseType.multiple_choice,
+            "prompt": 'What does "Buenos días" mean?',
+            "correct_answer": "Good morning",
             "options": [
-                ("Buenos", True),
-                ("días", True),
-                ("Buenas", False),
-                ("noches", False),
+                ("Good morning", True),
+                ("Good night", False),
+                ("Good afternoon", False),
+                ("Hello", False),
             ],
         },
         {
@@ -292,7 +292,7 @@ def seed_learner(db):
         username="learner",
         email="learner@example.com",
     )
-    print(f"✓ Learner user created: {learner.username} (ID: {learner.id})")
+    print(f"[OK] Learner user created: {learner.username} (ID: {learner.id})")
 
     stats = (
         db.query(UserStats)
@@ -314,7 +314,7 @@ def seed_learner(db):
 
         db.add(stats)
         db.commit()
-        print(f"✓ Learner stats created")
+        print(f"[OK] Learner stats created")
 
     return learner
 
@@ -395,7 +395,7 @@ def seed_demo_progress(db, learner):
 
     db.commit()
 
-    print(f"✓ Demo progress created: {len(demo_states)} lessons with states")
+    print(f"[OK] Demo progress created: {len(demo_states)} lessons with states")
     for lesson, state in demo_states:
         print(f"  - Lesson {lesson.id}: {state.value}")
 

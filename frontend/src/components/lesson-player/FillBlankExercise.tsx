@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Exercise } from '@/types/api';
+import React, { useEffect, useState } from "react";
+import { Exercise } from "@/types/api";
 
 interface FillBlankExerciseProps {
   exercise: Exercise;
@@ -8,26 +8,53 @@ interface FillBlankExerciseProps {
   onSubmit: () => void;
 }
 
-export function FillBlankExercise({ exercise, onAnswerSelected, onCanCheck, onSubmit }: FillBlankExerciseProps) {
+export function FillBlankExercise({
+  exercise,
+  onAnswerSelected,
+  onCanCheck,
+  onSubmit,
+}: FillBlankExerciseProps) {
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue("");
+    onAnswerSelected("");
+    onCanCheck(false);
+  }, [exercise, onAnswerSelected, onCanCheck]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
+
     setValue(val);
     onAnswerSelected(val);
     onCanCheck(val.trim().length > 0);
   };
 
+  const displayPrompt = exercise.prompt
+    .replace(/^Complete the sentence:\s*/i, "")
+    .trim();
+
   return (
-    <div className="flex flex-col h-full w-full max-w-[680px] mx-auto pt-8 px-4">
-      <h2 className="text-[28px] font-extrabold text-[#f7f7f7] mb-8">Complete the sentence</h2>
+    <div className="mx-auto flex h-full w-full max-w-[680px] flex-col px-4 pt-8">
+      <h2 className="mb-4 text-[28px] font-extrabold text-[#f7f7f7]">
+        Complete the sentence
+      </h2>
+
+      <p className="mb-8 text-[22px] font-bold leading-relaxed text-[#f7f7f7]">
+        {displayPrompt}
+      </p>
+
       <input
         type="text"
         value={value}
         onChange={handleChange}
-        onKeyDown={(e) => e.key === 'Enter' && value.trim() && onSubmit()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && value.trim()) {
+            onSubmit();
+          }
+        }}
         autoFocus
-        className="w-full p-4 text-xl border-2 border-[#536871] rounded-xl focus:outline-none focus:border-[#1cb0f6] bg-transparent text-[#ffffff] placeholder-[#8c9aa0]"
+        className="w-full rounded-xl border-2 border-[#536871] bg-transparent p-4 text-xl text-white placeholder-[#8c9aa0] focus:border-[#1cb0f6] focus:outline-none"
         placeholder="Type your answer here..."
       />
     </div>
